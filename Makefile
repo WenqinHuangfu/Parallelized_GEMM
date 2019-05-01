@@ -12,7 +12,7 @@ LDFLAGS = $(MKLFLAGS) -lpthread -lm
 LDFLAGS1 = -std=gnu99 -O2 DNDEBUG -g0 -msse4.2 -masm=intel -lpthread -lm
 OMPFLAGS = -openmp
 
-all:	benchmark-naive benchmark-blocked benchmark-blas 
+all:	benchmark-naive benchmark-blocked benchmark-blas benchmark-omp benchmark-mpi benchmark-pthread
 
 benchmark-naive: benchmark.o dgemm-naive.o
 	$(CC) -o $@ $^ $(LDFLAGS)
