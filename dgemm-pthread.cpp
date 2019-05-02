@@ -12,8 +12,8 @@ struct Data{
 	double *C;
 };
 
-void *runner(void *Data) {
-	Data *data = (Data *) par;
+void *runner(void *input) {
+	Data *data = (Data *) input;
 	double *A = data->A;
 	double *B = data->B;
 	double *C = data->C;
