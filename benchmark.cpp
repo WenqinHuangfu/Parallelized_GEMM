@@ -52,7 +52,7 @@ int main( int argc, char **argv )
     printf ("Description:\t%s\n\n", dgemm_desc);
 
     /* These sizes should highlight performance dips at multiples of certain powers-of-two */
-    int test_sizes[] = {800, 1600};
+    int test_sizes[] = {1600};
     /*For each test size*/
     for( int isize = 0; isize < sizeof(test_sizes)/sizeof(test_sizes[0]); isize++ )
     {
