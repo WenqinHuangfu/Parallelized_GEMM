@@ -19,7 +19,7 @@ benchmark-pthread: benchmark.o dgemm-pthread.o
 	$(CC) $(OMPFLAGS) -o $@ $^ $(LDFLAGS)
 benchmark-openmp: benchmark.o dgemm-openmp.o
 	$(CC) $(OMPFLAGS) -o $@ $^ $(LDFLAGS)
-benchmark-mpi: test.o dgemm-mpi.o
+benchmark-mpi: MPI_benchmark.o dgemm-mpi.o
 	$(MPICC) -o $@ $^ $(LDFLAGS)
 
 benchmark.o: benchmark.cpp
@@ -34,7 +34,7 @@ dgemm-pthread.o:dgemm-pthread.cpp
 	$(CC) -c -g -Wall $<
 dgemm-openmp.o:dgemm-openmp.cpp
 	$(CC) $(OMPFLAGS) -c -g -Wall $<
-test.o: test.cpp
+MPI_benchmark.o: MPI_benchmark.cpp
 	$(MPICC) -c -g $<
 dgemm-mpi.o: dgemm-mpi.cpp
 	$(MPICC) -c -g $<
