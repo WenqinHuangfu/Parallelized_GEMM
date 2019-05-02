@@ -23,7 +23,7 @@ benchmark-blocked: benchmark.o dgemm-blocked.o
 benchmark-blas: benchmark.o dgemm-blas.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-benchmark-omp: benchmark-omp.o dgemm-omp.o
+benchmark-omp: benchmark-omp.o dgemm-openmp.o
 	$(CC) $(OMPFLAGS) -o $@ $^ $(LDFLAGS)
 
 benchmark-mpi: benchmark-mpi.o dgemm-mpi.o
@@ -32,8 +32,8 @@ benchmark-mpi: benchmark-mpi.o dgemm-mpi.o
 benchmark-pthread: benchmark-pthread.o dgemm-pthread.o
 	$(CC) -o $@ $^ -O3 $(LDFLAGS)
 
-dgemm-omp.o: dgemm-omp.cpp
-	$(CC) $(OMPFLAGS) -c $<
+#dgemm-omp.o: dgemm-omp.cpp
+#	$(CC) $(OMPFLAGS) -c $<
 
 #benchmark-mpi.o: benchmark-mpi.cpp
 #	$(MPICC) -c $<
