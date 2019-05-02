@@ -4,7 +4,7 @@
 #include <pthread.h>
 #define thread_count 24
 const char *dgemm_desc = "pthread, three-loop dgemm.";
-struct param{
+struct Data{
 	int id;
 	int n;
 	double *A;
@@ -12,8 +12,8 @@ struct param{
 	double *C;
 };
 
-void *runner(void *par) {
-	param *data = (param *) par;
+void *runner(void *Data) {
+	Data *data = (Data *) par;
 	double *A = data->A;
 	double *B = data->B;
 	double *C = data->C;
@@ -43,7 +43,7 @@ void square_dgemm( int n, double *A, double *B, double *C)
 	
   pthread_t thread_handlers[thread_count];
   for (thread = 0; thread < thread_count; thread++){
-	param *data = (param *)malloc(sizeof(param));
+	Data *data = (Data *)malloc(sizeof(Data));
 	data->A = A;
 	data->B = B;
 	data->C = C;
