@@ -1,0 +1,18 @@
+#!/bin/bash  
+# Next line shows the job name you can find when querying the job status
+#SBATCH --job-name="mm_omp"
+# Next line is the output file name of the execution log
+#SBATCH --output="job_mmomp4core.%j.out"
+# Next line shows where to ask for machine nodes
+#SBATCH --partition=compute
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=4
+#SBATCH --export=ALL
+# Next line limits the job execution time at most 3 minute.
+#SBATCH -t 00:010:00
+#SBATCH -A csb167 
+
+#ibrun in verbose mode will give binding detail  
+
+export OMP_NUM_THREADS=4
+./benchmark-omp
