@@ -15,4 +15,4 @@
 #ibrun in verbose mode will give binding detail  
 
 export OMP_NUM_THREADS=4
-./benchmark-omp
+./benchmark-openmp
