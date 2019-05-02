@@ -32,8 +32,8 @@ benchmark-mpi: benchmark-mpi.o dgemm-mpi.o
 benchmark-pthread: benchmark-pthread.o dgemm-pthread.o
 	$(CC) -o $@ $^ -O3 $(LDFLAGS)
 
-#dgemm-omp.o: dgemm-omp.cpp
-#	$(CC) $(OMPFLAGS) -c $<
+dgemm-omp.o: dgemm-omp.cpp
+	$(CC) $(OMPFLAGS) -c $<
 
 #benchmark-mpi.o: benchmark-mpi.cpp
 #	$(MPICC) -c $<
