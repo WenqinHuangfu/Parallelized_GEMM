@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <mkl.h>
-#define thread_count 24
+#define thread_count 4
 const char *dgemm_desc = "pthread, three-loop dgemm.";
 const double BETA = 1.0;
 const char *ntran = "N";
@@ -20,7 +20,7 @@ const char *ntran = "N";
 
 #define min(a,b) (((a)<(b))?(a):(b))
 
-struct param{
+struct Data{
     int id;
     int lda;
     double *A;
@@ -30,7 +30,7 @@ struct param{
 
 void *runner(void *par) {
     //printf("Enter working thread..\n");
-    param *data = (param *) par;
+    Data *data = (Data *) par;
     double *A = data->A;
     double *B = data->B;
     double *C = data->C;
