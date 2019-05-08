@@ -29,7 +29,7 @@ struct param{
 };
 
 void *runner(void *par) {
-    printf("Enter working thread..\n");
+    //printf("Enter working thread..\n");
     param *data = (param *) par;
     double *A = data->A;
     double *B = data->B;
@@ -76,7 +76,7 @@ void *runner(void *par) {
 }
 void square_dgemm( int lda, double *A, double *B, double *C)
 {
-    printf("Enter matrix multiplication using pthread..\n");
+    //printf("Enter matrix multiplication using pthread..\n");
     int thread;
     //pthread_t *thread_handlers = (pthread_t *)malloc(thread_count*sizeof(pthread_t));
     pthread_t thread_handlers[thread_count];
