@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <mkl.h>
-#define thread_count 24
+#define thread_count 4
 const char *dgemm_desc = "pthread, three-loop dgemm.";
 const double BETA = 1.0;
 const char *ntran = "N";
