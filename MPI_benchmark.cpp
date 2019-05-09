@@ -92,7 +92,7 @@ int main( int argc, char **argv )
 		
 	/* Set initial C to 0 and do matrix multiply of A*B */
         memset( C, 0, sizeof( double ) * n * n );
-        square_dgemm( n, A, B, C, &argc, &argv );
+        //square_dgemm( n, A, B, C, &argc, &argv );
 	/*Subtract A*B from C using standard dgemm (note that this should be 0 to within machine roundoff)*/
         const double BETA = 1.0;
 	const double negOne = -1.0;
