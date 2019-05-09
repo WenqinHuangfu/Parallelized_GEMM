@@ -15,5 +15,5 @@
 #SBATCH -t 00:04:00
 
 
-./benchmark-pthread 
+# ./benchmark-pthread 
 ./benchmark-pthread -num_threads 4
