@@ -22,11 +22,11 @@ const char *ntran = "N";
 void square_dgemm( int lda, double *A, double *B, double *C)
 {
     //omp_set_num_threads(thread_count);
-    printf("enter matrix multiplication using openmp\n");
-    printf("start computation, num_threads=%i\n",omp_get_num_threads());
+    //printf("enter matrix multiplication using openmp\n");
+    //printf("start computation, num_threads=%i\n",omp_get_num_threads());
 #pragma omp parallel
     {
-        printf("thread_num=%i\n",omp_get_thread_num());
+        //printf("thread_num=%i\n",omp_get_thread_num());
         int j;
 #pragma omp for
         /*For each block combination*/
