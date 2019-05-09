@@ -20,7 +20,7 @@ const char *ntran = "N";
 
 #define min(a,b) (((a)<(b))?(a):(b))
 
-struct param{
+struct Data{
     int id;
     int lda;
     double *A;
@@ -30,7 +30,7 @@ struct param{
 
 void *runner(void *par) {
     //printf("Enter working thread..\n");
-    param *data = (param *) par;
+    Data *data = (Data *) par;
     double *A = data->A;
     double *B = data->B;
     double *C = data->C;
@@ -81,7 +81,7 @@ void square_dgemm( int lda, double *A, double *B, double *C)
     //pthread_t *thread_handlers = (pthread_t *)malloc(thread_count*sizeof(pthread_t));
     pthread_t thread_handlers[thread_count];
     for (thread = 0; thread < thread_count; thread++){
-        param *data = (param *)malloc(sizeof(param));
+        Data *data = (Data *)malloc(sizeof(Data));
         data->A = A;
         data->B = B;
         data->C = C;
