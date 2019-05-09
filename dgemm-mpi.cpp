@@ -27,7 +27,7 @@ MPI_Status status;
 
 void square_dgemm( int lda, double *A, double *B, double *C, int *argc, char ***argv )
 {
-    printf("enter\n");
+    //printf("enter\n");
     int taskid,numtasks,numworkers,source,dest,mtype;
     int cols,avecol,extra,offset;
     int i,j,k;
@@ -45,7 +45,7 @@ void square_dgemm( int lda, double *A, double *B, double *C, int *argc, char ***
     numworkers = numtasks - 1;
     //master
     if (taskid == MASTER){
-        printf("master started.. num_tasks= %d \n", numtasks);
+        //printf("master started.. num_tasks= %d \n", numtasks);
         avecol = lda/numworkers;
         extra = lda%numworkers;
         offset = 0;
@@ -53,13 +53,13 @@ void square_dgemm( int lda, double *A, double *B, double *C, int *argc, char ***
         for (dest = 1; dest <= numworkers; dest++)
         {
             cols = (dest <= extra) ? avecol+1 :avecol;
-            printf("sending %d columns to task %d offset = %d\n",cols, dest, offset);
+            //printf("sending %d columns to task %d offset = %d\n",cols, dest, offset);
             MPI_Send(&offset, 1, MPI_INT, dest, mtype, MPI_COMM_WORLD);
             MPI_Send(&cols, 1, MPI_INT, dest, mtype, MPI_COMM_WORLD);
             MPI_Send(&B[offset*lda], cols*lda, MPI_DOUBLE, dest, mtype, MPI_COMM_WORLD);
             MPI_Send(A, lda*lda, MPI_DOUBLE, dest, mtype, MPI_COMM_WORLD);
             offset += cols;
-            printf("sending successful to task %d\n",dest);
+            //printf("sending successful to task %d\n",dest);
         }
         mtype = FROM_WORKER;
         for (i=1; i<=numworkers; i++)
@@ -68,19 +68,19 @@ void square_dgemm( int lda, double *A, double *B, double *C, int *argc, char ***
             MPI_Recv(&offset, 1, MPI_INT, source, mtype, MPI_COMM_WORLD, &status);
             MPI_Recv(&cols, 1, MPI_INT, source, mtype, MPI_COMM_WORLD, &status);
             MPI_Recv(&C[offset*lda], cols*lda, MPI_DOUBLE, source, mtype, MPI_COMM_WORLD, &status);
-            printf("receiving results from task %d\n",source);
+            //printf("receiving results from task %d\n",source);
         }
         
     }
     if (taskid > MASTER)
     {
         mtype = FROM_MASTER;
-        printf("workerid = %d starts receiving job\n",taskid);
+        //printf("workerid = %d starts receiving job\n",taskid);
         MPI_Recv(&offset, 1, MPI_INT, MASTER, mtype, MPI_COMM_WORLD, &status);
         MPI_Recv(&cols, 1, MPI_INT, MASTER, mtype, MPI_COMM_WORLD, &status);
         MPI_Recv(&B[offset*lda], cols*lda, MPI_DOUBLE, MASTER, mtype, MPI_COMM_WORLD, &status);
         MPI_Recv(A, lda*lda, MPI_DOUBLE, MASTER, mtype, MPI_COMM_WORLD, &status);
-        printf("workerid = %d receiving job successful!\n",taskid);
+        //printf("workerid = %d receiving job successful!\n",taskid);
         
         for( int j = offset; j < offset+cols; j += BLOCK_SIZE )
         {
@@ -111,10 +111,10 @@ void square_dgemm( int lda, double *A, double *B, double *C, int *argc, char ***
         }
         
         mtype = FROM_WORKER;
-        printf("workerid = %d starts sending finished job\n",taskid);
+        //printf("workerid = %d starts sending finished job\n",taskid);
         MPI_Send(&offset, 1, MPI_INT, MASTER, mtype, MPI_COMM_WORLD);
         MPI_Send(&cols, 1, MPI_INT, MASTER, mtype, MPI_COMM_WORLD);
         MPI_Send(&C[offset*lda], cols*lda, MPI_DOUBLE, MASTER, mtype, MPI_COMM_WORLD);
-        printf("workerid = %d sending finishes\n",taskid);
+        //printf("workerid = %d sending finishes\n",taskid);
     }
 }
